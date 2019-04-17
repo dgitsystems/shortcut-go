@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/http/httputil"
 )
 
 const apiURL string = "https://api.clubhouse.io/api/v2/"
@@ -13,6 +14,13 @@ const apiURL string = "https://api.clubhouse.io/api/v2/"
 type Clubhouse struct {
 	Token  string
 	Client *http.Client
+	Debug  bool
+}
+
+// transport is an http.RoundTripper that keeps track of the in-flight
+// request and implements hooks to report HTTP tracing events.
+type transport struct {
+	current *http.Request
 }
 
 // New creates a new instance of the Clubhouse object that is used to send data to ClubHouse
@@ -21,6 +29,12 @@ func New(token string) *Clubhouse {
 		Token:  token,
 		Client: &http.Client{},
 	}
+}
+
+// Set the debug value
+func (ch *Clubhouse) SetDebug(debug bool) *Clubhouse {
+	ch.Debug = debug
+	return ch
 }
 
 func (ch *Clubhouse) getURL(resource string) string {
@@ -86,11 +100,24 @@ func (ch *Clubhouse) listResources(resource string) ([]byte, error) {
 	if err != nil {
 		return []byte{}, err
 	}
+	if ch.Debug {
+		fmt.Printf("=>%v\n", req.URL.String())
+	}
 	resp, err := ch.Client.Do(req)
 	if err != nil {
 		return []byte{}, err
 	}
+	if ch.Debug {
+		dump, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		fmt.Printf("%q\n", dump)
+	}
 	defer resp.Body.Close()
+	if ch.Debug {
+		fmt.Printf("<=%v\n", resp.Status)
+	}
 	if resp.StatusCode != 200 {
 		return []byte{}, fmt.Errorf("API Returned HTTP Status Code of %d", resp.StatusCode)
 	}
