@@ -57,9 +57,22 @@ func (ch *Clubhouse) getResource(resource string) ([]byte, error) {
 	if err != nil {
 		return []byte{}, err
 	}
+	if ch.Debug {
+		fmt.Printf("=>%v\n", req.URL.String())
+	}
 	resp, err := ch.Client.Do(req)
 	if err != nil {
 		return []byte{}, err
+	}
+	if ch.Debug {
+		dump, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		fmt.Printf("%q\n", dump)
+	}
+	if ch.Debug {
+		fmt.Printf("<=%v\n", resp.Status)
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != 200 {
