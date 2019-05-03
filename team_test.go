@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	// Frameworks
-	ch "github.com/djthorpe/clubhouse-go"
+	ch "github.com/djthorpe/clubhouse-go/v2"
 )
 
 // In order to run tests, you will need to put your
