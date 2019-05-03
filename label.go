@@ -29,10 +29,14 @@ type LabelWithCounts struct {
 }
 
 type Label struct {
-	CreatedAt time.Time `json:"created_at"`
-	ID        int64     `json:"id"`
-	Name      string    `json:"name"`
-	UpdatedAt time.Time `json:"updated_at"`
+	Archived   bool      `json:"archived"`
+	Color      string    `json:"color"`
+	CreatedAt  time.Time `json:"created_at"`
+	EntityType string    `json:"entity_type"`
+	ExternalID int64     `json:"external_id"`
+	ID         int64     `json:"id"`
+	Name       string    `json:"name"`
+	UpdatedAt  time.Time `json:"updated_at"`
 }
 
 type UpdateLabel struct {
