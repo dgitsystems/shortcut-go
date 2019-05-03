@@ -32,7 +32,7 @@ type CreateStory struct {
 type Story struct {
 	Archived        bool        `json:"archived"`
 	Comments        []Comment   `json:"comments"`
-	CreatedAt       string      `json:"created_at"`
+	CreatedAt       time.Time   `json:"created_at"`
 	Deadline        string      `json:"deadline"`
 	Description     string      `json:"description"`
 	EpicID          int64       `json:"epic_id"`
@@ -50,7 +50,7 @@ type Story struct {
 	StoryLinks      []StoryLink `json:"story_links"`
 	StoryType       string      `json:"story_type"`
 	Tasks           []Task      `json:"tasks"`
-	UpdatedAt       string      `json:"updated_at"`
+	UpdatedAt       time.Time   `json:"updated_at"`
 	WorkflowStateID int64       `json:"workflow_state_id"`
 }
 
