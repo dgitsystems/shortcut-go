@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
+	"net/url"
 )
 
 const apiURL string = "https://api.clubhouse.io/api/v2/"
@@ -39,6 +40,16 @@ func (ch *Clubhouse) SetDebug(debug bool) *Clubhouse {
 
 func (ch *Clubhouse) getURL(resource string) string {
 	return fmt.Sprintf("%s%s?token=%s", apiURL, resource, ch.Token)
+}
+
+func (ch *Clubhouse) getDownloadUrl(resource string) (string, error) {
+	if url, err := url.Parse(resource); err != nil {
+		return "", err
+	} else if url.Host == "api.clubhouse.io" {
+		return fmt.Sprintf("%s?token=%s", resource, ch.Token), nil
+	} else {
+		return resource, nil
+	}
 }
 
 func (ch *Clubhouse) getResource(resource string) ([]byte, error) {
