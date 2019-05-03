@@ -12,10 +12,14 @@ type CreateLabel struct {
 }
 
 type LabelWithCounts struct {
-	CreatedAt time.Time `json:"created_at"`
-	ID        int64     `json:"id"`
-	Name      string    `json:"name"`
-	Stats     struct {
+	Archived   bool      `json:"archived"`
+	Color      string    `json:"color"`
+	CreatedAt  time.Time `json:"created_at"`
+	EntityType string    `json:"entity_type"`
+	ExternalID int64     `json:"external_id"`
+	ID         int64     `json:"id"`
+	Name       string    `json:"name"`
+	Stats      struct {
 		NumEpics              int64 `json:"num_epics"`
 		NumPointsCompleted    int64 `json:"num_points_completed"`
 		NumPointsInProgress   int64 `json:"num_points_in_progress"`
