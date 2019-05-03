@@ -23,18 +23,31 @@ type CreateEpic struct {
 
 //An Epic is a collection of stories that together might make up a release, a milestone, or some other large initiative that your organization is working on.
 type Epic struct {
-	Archived    bool              `json:"archived"`
-	Comments    []ThreadedComment `json:"comments"`
-	CreatedAt   time.Time         `json:"created_at"`
-	Deadline    time.Time         `json:"deadline"`
-	Description string            `json:"description"`
-	FollowerIds []string          `json:"follower_ids"`
-	ID          int64             `json:"id"`
-	Name        string            `json:"name"`
-	OwnerIds    []string          `json:"owner_ids"`
-	Position    int64             `json:"position"`
-	State       string            `json:"state"`
-	UpdatedAt   time.Time         `json:"updated_at"`
+	Archived            bool              `json:"archived"`
+	Comments            []ThreadedComment `json:"comments"`
+	Completed           bool              `json:"completed"`
+	CompletedAt         time.Time         `json:"completed_at"`
+	CompletedAtOverride time.Time         `json:"completed_at_override"`
+	CreatedAt           time.Time         `json:"created_at"`
+	Deadline            time.Time         `json:"deadline"`
+	Description         string            `json:"description"`
+	EpicStateID         int64             `json:"epic_state_id"`
+	ExternalID          int64             `json:"external_id"`
+	FollowerIds         []string          `json:"follower_ids"`
+	ID                  int64             `json:"id"`
+	Labels              []Label           `json:"labels"`
+	MentionIds          []string          `json:"mention_ids"`
+	MilestoneID         int64             `json:"milestone_id"`
+	Name                string            `json:"name"`
+	OwnerIds            []string          `json:"owner_ids"`
+	Position            int64             `json:"position"`
+	ProjectIds          []int64           `json:"project_ids"`
+	RequestedByID       string            `json:"requested_by_id"`
+	Started             bool              `json:"started"`
+	StartedAt           time.Time         `json:"started_at"`
+	StartedAtOverride   time.Time         `json:"started_at_override"`
+	State               string            `json:"state"`
+	UpdatedAt           time.Time         `json:"updated_at"`
 }
 
 // UpdateEpic the body used for ch.EpicUpdate()
