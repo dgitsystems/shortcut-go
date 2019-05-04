@@ -8,13 +8,15 @@ import (
 
 //ThreadedComment are comments associated with Epic Discussions
 type ThreadedComment struct {
-	AuthorID  string            `json:"author_id"`
-	CreatedAt time.Time         `json:"created_at"`
-	Deleted   bool              `json:"deleted"`
-	ID        int64             `json:"id"`
-	Text      string            `json:"text"`
-	UpdatedAt time.Time         `json:"updated_at"`
-	Comments  []ThreadedComment `json:"comments"`
+	AuthorID   string            `json:"author_id"`
+	CreatedAt  time.Time         `json:"created_at"`
+	Deleted    bool              `json:"deleted"`
+	ID         int64             `json:"id"`
+	MentionIds []string          `json:"mention_ids"`
+	Position   int64             `json:"position"`
+	Text       string            `json:"text"`
+	UpdatedAt  time.Time         `json:"updated_at"`
+	Comments   []ThreadedComment `json:"comments"`
 }
 
 //CreateComment is the body used for ch.CommentCreate()
