@@ -3,19 +3,29 @@ package clubhouse
 import (
 	"encoding/json"
 	"fmt"
+	"time"
 )
 
 type Member struct {
-	ID      string  `json:"id"`
-	Profile Profile `json:"profile"`
+	ID                   string        `json:"id"`
+	CreatedAt            time.Time     `json:"created_at"`
+	CreatedWithoutInvite bool          `json:"created_without_invite"`
+	Disabled             bool          `json:"disabled"`
+	GroupIds             []interface{} `json:"group_ids"`
+	Profile              Profile       `json:"profile"`
+	Role                 string        `json:"role"`
+	State                string        `json:"state"`
+	UpdatedAt            time.Time     `json:"updated_at"`
 }
 
 type Profile struct {
 	Deactivated            bool   `json:"deactivated"`
 	EmailAddress           string `json:"email_address"`
+	GravatarHash           string `json:"gravatar_hash"`
+	Membername             string `json:"membername"`
+	MentionName            string `json:"mention_name"`
 	Name                   string `json:"name"`
 	TwoFactorAuthActivated bool   `json:"two_factor_auth_activated"`
-	Membername             string `json:"membername"`
 }
 
 func (ch *Clubhouse) GetMember(memberID int64) (Member, error) {
