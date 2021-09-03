@@ -1,5 +1,5 @@
 # clubhouse-go
-A Go Package for the Clubhouse API
+A Go Package for the Clubhouse (now called "Shortcut") API
 
 This repo has been forked from https://github.com/djthorpe/clubhouse-go, as that repo has been archived but is
 missing (at least) some important structs.
