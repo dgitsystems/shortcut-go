@@ -1,4 +1,4 @@
-package clubhouse
+package shortcut
 
 import (
 	"encoding/json"
@@ -19,7 +19,7 @@ type ThreadedComment struct {
 	Comments   []ThreadedComment `json:"comments"`
 }
 
-//CreateComment is the body used for ch.CommentCreate()
+//CreateComment is the body used for sh.CommentCreate()
 //Required fields are:
 // CreateComment.Text
 type CreateComment struct {
@@ -48,8 +48,8 @@ type UpdateComment struct {
 }
 
 //CommentCreate allows you to create a Comment on any Story.
-// Calls POST https://api.clubhouse.io/api/v1/stories/{storyID}/comments
-func (ch *Clubhouse) CommentCreate(newComment CreateComment, storyID int64) (Comment, error) {
+// Calls POST https://api.shortcut.io/api/v3/stories/{storyID}/comments
+func (ch *Shortcut) CommentCreate(newComment CreateComment, storyID int64) (Comment, error) {
 	jsonStr, _ := json.Marshal(newComment)
 
 	body, err := ch.createObject(fmt.Sprintf("%s/%d/%s", "stories", storyID, "comments"), jsonStr)
@@ -62,8 +62,8 @@ func (ch *Clubhouse) CommentCreate(newComment CreateComment, storyID int64) (Com
 }
 
 //CommentGet is used to get Comment information.
-//Calls  GET https://api.clubhouse.io/api/v1/stories/{storyID}/comments/{commentID}
-func (ch *Clubhouse) CommentGet(storyID int64, commentID int64) (Comment, error) {
+//Calls  GET https://api.shortcut.io/api/v3/stories/{storyID}/comments/{commentID}
+func (ch *Shortcut) CommentGet(storyID int64, commentID int64) (Comment, error) {
 	body, err := ch.getResource(fmt.Sprintf("%s/%d/%s/%d", "stories", storyID, "comments", commentID))
 	if err != nil {
 		return Comment{}, err
@@ -74,8 +74,8 @@ func (ch *Clubhouse) CommentGet(storyID int64, commentID int64) (Comment, error)
 }
 
 //CommentUpdate replaces the text of the existing Comment.
-//Calls PUT https://api.clubhouse.io/api/v1/stories/{storyID}/comments/{commentID}
-func (ch *Clubhouse) CommentUpdate(updatedComment UpdateComment, storyID int64, commentID int64) (Comment, error) {
+//Calls PUT https://api.shortcut.io/api/v3/stories/{storyID}/comments/{commentID}
+func (ch *Shortcut) CommentUpdate(updatedComment UpdateComment, storyID int64, commentID int64) (Comment, error) {
 	jsonStr, _ := json.Marshal(updatedComment)
 	body, err := ch.updateResource(fmt.Sprintf("%s/%d/%s/%d", "stories", storyID, "comments", commentID), jsonStr)
 	if err != nil {
@@ -87,7 +87,7 @@ func (ch *Clubhouse) CommentUpdate(updatedComment UpdateComment, storyID int64, 
 }
 
 //CommentDelete deletes a comment from any story.
-//Calls DELETE https://api.clubhouse.io/api/v1/stories/{storyID}/comments/{commentID}
-func (ch *Clubhouse) CommentDelete(storyID int64, commentID int64) error {
+//Calls DELETE https://api.shortcut.io/api/v3/stories/{storyID}/comments/{commentID}
+func (ch *Shortcut) CommentDelete(storyID int64, commentID int64) error {
 	return ch.deleteResource(fmt.Sprintf("%s/%d/%s/%d", "stories", storyID, "comments", commentID))
 }

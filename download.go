@@ -1,4 +1,4 @@
-package clubhouse
+package shortcut
 
 import (
 	"fmt"
@@ -41,7 +41,7 @@ func extractPath(src, path string) (string, error) {
 
 // Download downloads a URL to a path, which can be either
 // an existing folder or a file within an existing folder
-func (ch *Clubhouse) Download(method, src, path string) (string, error) {
+func (ch *Shortcut) Download(method, src, path string) (string, error) {
 	if path, err := extractPath(src, path); err != nil {
 		return "", err
 	} else if url, err := ch.getDownloadUrl(src); err != nil {

@@ -1,3 +1,3 @@
-module github.com/dgitsystems/clubhouse-go/v2
+module github.com/dgitsystems/shortcut-go/v3
 
 go 1.12

@@ -1,4 +1,4 @@
-package clubhouse
+package shortcut
 
 import (
 	"encoding/json"
@@ -36,7 +36,7 @@ type UpdateTask struct {
 	OwnerIds    []string `json:"owner_ids"`
 }
 
-func (ch *Clubhouse) CreateTask(newTask CreateTask, storyID int64) (Task, error) {
+func (ch *Shortcut) CreateTask(newTask CreateTask, storyID int64) (Task, error) {
 	jsonStr, _ := json.Marshal(newTask)
 
 	body, err := ch.createObject(fmt.Sprintf("%s/%d/%s", "stories", storyID, "tasks"), jsonStr)
@@ -48,7 +48,7 @@ func (ch *Clubhouse) CreateTask(newTask CreateTask, storyID int64) (Task, error)
 	return task, nil
 }
 
-func (ch *Clubhouse) GetTask(storyID int64, taskID int64) (Task, error) {
+func (ch *Shortcut) GetTask(storyID int64, taskID int64) (Task, error) {
 	body, err := ch.getResource(fmt.Sprintf("%s/%d/%s/%d", "stories", storyID, "tasks", taskID))
 	if err != nil {
 		return Task{}, err
@@ -58,7 +58,7 @@ func (ch *Clubhouse) GetTask(storyID int64, taskID int64) (Task, error) {
 	return task, nil
 }
 
-func (ch *Clubhouse) UpdateTask(updatedTask UpdateTask, storyID int64, taskID int64) (Task, error) {
+func (ch *Shortcut) UpdateTask(updatedTask UpdateTask, storyID int64, taskID int64) (Task, error) {
 	jsonStr, _ := json.Marshal(updatedTask)
 	body, err := ch.updateResource(fmt.Sprintf("%s/%d/%s/%d", "stories", storyID, "tasks", taskID), jsonStr)
 	if err != nil {
@@ -69,6 +69,6 @@ func (ch *Clubhouse) UpdateTask(updatedTask UpdateTask, storyID int64, taskID in
 	return task, nil
 }
 
-func (ch *Clubhouse) DeleteTask(storyID int64, taskID int64) error {
+func (ch *Shortcut) DeleteTask(storyID int64, taskID int64) error {
 	return ch.deleteResource(fmt.Sprintf("%s/%d/%s/%d", "stories", storyID, "tasks", taskID))
 }

@@ -1,4 +1,4 @@
-package clubhouse
+package shortcut
 
 import (
 	"encoding/json"
@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// A CHFile is any document uploaded to your Clubhouse. Files attached from a third-party service can be accessed using the Linked Files endpoint.
+// A CHFile is any document uploaded to your Shortcut. Files attached from a third-party service can be accessed using the Linked Files endpoint.
 type CHFile struct {
 	ContentType  string    `json:"content_type"`
 	CreatedAt    time.Time `json:"created_at"`
@@ -34,8 +34,8 @@ type CHUpdateFile struct {
 }
 
 // FileGet returns information about the selected File.
-// Calls GET https://api.clubhouse.io/api/v1/files/{fileID}
-func (ch *Clubhouse) FileGet(fileID int64) (CHFile, error) {
+// Calls GET https://api.shortcut.io/api/v3/files/{fileID}
+func (ch *Shortcut) FileGet(fileID int64) (CHFile, error) {
 	body, err := ch.getResource(fmt.Sprintf("%s/%d", "files", fileID))
 	if err != nil {
 		return CHFile{}, err
@@ -45,9 +45,9 @@ func (ch *Clubhouse) FileGet(fileID int64) (CHFile, error) {
 	return file, nil
 }
 
-// FileUpdate can used to update the properties of a file uploaded to Clubhouse.
-// Calls PUT https://api.clubhouse.io/api/v1/files/{fileID}
-func (ch *Clubhouse) FileUpdate(updatedFile CHUpdateFile, fileID int64) (CHFile, error) {
+// FileUpdate can used to update the properties of a file uploaded to Shortcut.
+// Calls PUT https://api.shortcut.io/api/v3/files/{fileID}
+func (ch *Shortcut) FileUpdate(updatedFile CHUpdateFile, fileID int64) (CHFile, error) {
 	jsonStr, _ := json.Marshal(updatedFile)
 	body, err := ch.updateResource(fmt.Sprintf("%s/%d", "files", fileID), jsonStr)
 	if err != nil {
@@ -59,14 +59,14 @@ func (ch *Clubhouse) FileUpdate(updatedFile CHUpdateFile, fileID int64) (CHFile,
 }
 
 // FileDelete can be used to delete any previously attached File.
-// Calls DELETE https://api.clubhouse.io/api/v1/files/{fileID}
-func (ch *Clubhouse) FileDelete(fileID int64) error {
+// Calls DELETE https://api.shortcut.io/api/v3/files/{fileID}
+func (ch *Shortcut) FileDelete(fileID int64) error {
 	return ch.deleteResource(fmt.Sprintf("%s/%d", "files", fileID))
 }
 
-// FileList returns a list of all Files and related attributes in your Clubhouse.
-// Calls GET https://api.clubhouse.io/api/v1/files
-func (ch *Clubhouse) FileList() ([]CHFile, error) {
+// FileList returns a list of all Files and related attributes in your Shortcut.
+// Calls GET https://api.shortcut.io/api/v3/files
+func (ch *Shortcut) FileList() ([]CHFile, error) {
 	body, err := ch.listResources("files")
 	if err != nil {
 		return []CHFile{}, err

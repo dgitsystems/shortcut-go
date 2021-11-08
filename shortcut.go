@@ -1,4 +1,4 @@
-package clubhouse
+package shortcut
 
 import (
 	"bytes"
@@ -9,10 +9,10 @@ import (
 	"net/url"
 )
 
-const apiURL string = "https://api.clubhouse.io/api/v2/"
+const apiURL string = "https://api.app.shortcut.com/api/v3/"
 
-// Clubhouse is a struct containing the token, and the http.Client used for sending the data to the clubhouse API.
-type Clubhouse struct {
+// Shortcut is a struct containing the token, and the http.Client used for sending the data to the shortcut API.
+type Shortcut struct {
 	Token  string
 	Client *http.Client
 	Debug  bool
@@ -24,35 +24,35 @@ type transport struct {
 	current *http.Request
 }
 
-// New creates a new instance of the Clubhouse object that is used to send data to ClubHouse
-func New(token string) *Clubhouse {
-	return &Clubhouse{
+// New creates a new instance of the Shortcut object that is used to send data to ClubHouse
+func New(token string) *Shortcut {
+	return &Shortcut{
 		Token:  token,
 		Client: &http.Client{},
 	}
 }
 
 // Set the debug value
-func (ch *Clubhouse) SetDebug(debug bool) *Clubhouse {
+func (ch *Shortcut) SetDebug(debug bool) *Shortcut {
 	ch.Debug = debug
 	return ch
 }
 
-func (ch *Clubhouse) getURL(resource string) string {
+func (ch *Shortcut) getURL(resource string) string {
 	return fmt.Sprintf("%s%s?token=%s", apiURL, resource, ch.Token)
 }
 
-func (ch *Clubhouse) getDownloadUrl(resource string) (string, error) {
+func (ch *Shortcut) getDownloadUrl(resource string) (string, error) {
 	if url, err := url.Parse(resource); err != nil {
 		return "", err
-	} else if url.Host == "api.clubhouse.io" {
+	} else if url.Host == "api.app.shortcut.com" {
 		return fmt.Sprintf("%s?token=%s", resource, ch.Token), nil
 	} else {
 		return resource, nil
 	}
 }
 
-func (ch *Clubhouse) getResource(resource string) ([]byte, error) {
+func (ch *Shortcut) getResource(resource string) ([]byte, error) {
 	req, err := http.NewRequest("GET", ch.getURL(resource), nil)
 	if err != nil {
 		return []byte{}, err
@@ -81,7 +81,7 @@ func (ch *Clubhouse) getResource(resource string) ([]byte, error) {
 	return ioutil.ReadAll(resp.Body)
 }
 
-func (ch *Clubhouse) updateResource(resource string, jsonStr []byte) ([]byte, error) {
+func (ch *Shortcut) updateResource(resource string, jsonStr []byte) ([]byte, error) {
 	req, err := http.NewRequest("PUT", ch.getURL(resource), bytes.NewBuffer(jsonStr))
 	if err != nil {
 		return []byte{}, err
@@ -101,7 +101,7 @@ func (ch *Clubhouse) updateResource(resource string, jsonStr []byte) ([]byte, er
 	return ioutil.ReadAll(resp.Body)
 }
 
-func (ch *Clubhouse) deleteResource(resource string) error {
+func (ch *Shortcut) deleteResource(resource string) error {
 	req, err := http.NewRequest("DELETE", ch.getURL(resource), nil)
 	if err != nil {
 		return err
@@ -119,7 +119,7 @@ func (ch *Clubhouse) deleteResource(resource string) error {
 	return nil
 }
 
-func (ch *Clubhouse) listResources(resource string) ([]byte, error) {
+func (ch *Shortcut) listResources(resource string) ([]byte, error) {
 	req, err := http.NewRequest("GET", ch.getURL(resource), nil)
 	if err != nil {
 		return []byte{}, err
@@ -148,7 +148,7 @@ func (ch *Clubhouse) listResources(resource string) ([]byte, error) {
 	return ioutil.ReadAll(resp.Body)
 }
 
-func (ch *Clubhouse) createObject(resource string, jsonStr []byte) ([]byte, error) {
+func (ch *Shortcut) createObject(resource string, jsonStr []byte) ([]byte, error) {
 	req, err := http.NewRequest("POST", ch.getURL(resource), bytes.NewBuffer(jsonStr))
 	if err != nil {
 		return []byte{}, err

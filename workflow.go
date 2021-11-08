@@ -1,4 +1,4 @@
-package clubhouse
+package shortcut
 
 import "encoding/json"
 
@@ -25,7 +25,7 @@ type State struct {
 	Verb        string `json:"verb"`
 }
 
-func (ch *Clubhouse) ListWorkflow() ([]Workflow, error) {
+func (ch *Shortcut) ListWorkflow() ([]Workflow, error) {
 	body, err := ch.listResources("workflows")
 	if err != nil {
 		return []Workflow{}, err

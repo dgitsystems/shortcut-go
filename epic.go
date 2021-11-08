@@ -1,4 +1,4 @@
-package clubhouse
+package shortcut
 
 import (
 	"encoding/json"
@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-//CreateEpic is the object passed to Clubhouse API to create an epic.
+//CreateEpic is the object passed to Shortcut API to create an epic.
 //Required fields are:
 // CreateEpic.Name
 type CreateEpic struct {
@@ -64,8 +64,8 @@ type UpdateEpic struct {
 }
 
 // EpicGet returns information about the selected Epic.
-//calls GET https://api.clubhouse.io/api/v1/epics/{epicID} to retrieve the specified epicID
-func (ch *Clubhouse) EpicGet(epicID int64) (Epic, error) {
+//calls GET https://api.shortcut.io/api/v3/epics/{epicID} to retrieve the specified epicID
+func (ch *Shortcut) EpicGet(epicID int64) (Epic, error) {
 	body, err := ch.getResource(fmt.Sprintf("%s/%d", "epics", epicID))
 	if err != nil {
 		return Epic{}, err
@@ -75,9 +75,9 @@ func (ch *Clubhouse) EpicGet(epicID int64) (Epic, error) {
 	return epic, nil
 }
 
-// EpicUpdate can be used to update numerous fields in the Epic. The only required parameter is Epic ID, which can be found in the Clubhouse UI.
-//calls PUT https://api.clubhouse.io/api/v1/epics/{epicID} and updates it with the data in the UpdateEpic object.
-func (ch *Clubhouse) EpicUpdate(updatedEpic UpdateEpic, epicID int64) (Epic, error) {
+// EpicUpdate can be used to update numerous fields in the Epic. The only required parameter is Epic ID, which can be found in the Shortcut UI.
+//calls PUT https://api.shortcut.io/api/v3/epics/{epicID} and updates it with the data in the UpdateEpic object.
+func (ch *Shortcut) EpicUpdate(updatedEpic UpdateEpic, epicID int64) (Epic, error) {
 	jsonStr, _ := json.Marshal(updatedEpic)
 	body, err := ch.updateResource(fmt.Sprintf("%s/%d", "epics", epicID), jsonStr)
 	if err != nil {
@@ -89,14 +89,14 @@ func (ch *Clubhouse) EpicUpdate(updatedEpic UpdateEpic, epicID int64) (Epic, err
 }
 
 // EpicDelete can be used to delete the Epic. The only required parameter is Epic ID.
-//Calls DELETE https://api.clubhouse.io/api/v1/epics/{epicID}
-func (ch *Clubhouse) EpicDelete(epicID int64) error {
+//Calls DELETE https://api.shortcut.io/api/v3/epics/{epicID}
+func (ch *Shortcut) EpicDelete(epicID int64) error {
 	return ch.deleteResource(fmt.Sprintf("%s/%d", "epics", epicID))
 }
 
 // EpicList returns a list of all Epics and their attributes.
-//Calls GET https://api.clubhouse.io/api/v1/epics/
-func (ch *Clubhouse) EpicList() ([]Epic, error) {
+//Calls GET https://api.shortcut.io/api/v3/epics/
+func (ch *Shortcut) EpicList() ([]Epic, error) {
 	body, err := ch.listResources("epics")
 	if err != nil {
 		return []Epic{}, err
@@ -106,9 +106,9 @@ func (ch *Clubhouse) EpicList() ([]Epic, error) {
 	return epics, nil
 }
 
-//EpicCreate allows you to create a new Epic in Clubhouse.
-//Calls POST https://api.clubhouse.io/api/v1/epics/
-func (ch *Clubhouse) EpicCreate(newEpic CreateEpic) (Epic, error) {
+//EpicCreate allows you to create a new Epic in Shortcut.
+//Calls POST https://api.shortcut.io/api/v3/epics/
+func (ch *Shortcut) EpicCreate(newEpic CreateEpic) (Epic, error) {
 	jsonStr, _ := json.Marshal(newEpic)
 	body, err := ch.createObject("epics", jsonStr)
 	if err != nil {

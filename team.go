@@ -1,4 +1,4 @@
-package clubhouse
+package shortcut
 
 import (
 	"encoding/json"
@@ -19,7 +19,7 @@ type Team struct {
 	TeamID      int64 `json:"team_id"`
 }
 
-func (ch *Clubhouse) ListTeams() ([]Team, error) {
+func (ch *Shortcut) ListTeams() ([]Team, error) {
 	body, err := ch.listResources("teams")
 	if err != nil {
 		return []Team{}, err
@@ -29,7 +29,7 @@ func (ch *Clubhouse) ListTeams() ([]Team, error) {
 	return teams, nil
 }
 
-func (ch *Clubhouse) GetTeam(teamID int64) (Team, error) {
+func (ch *Shortcut) GetTeam(teamID int64) (Team, error) {
 	body, err := ch.getResource(fmt.Sprintf("%s/%d", "teams", teamID))
 	if err != nil {
 		return Team{}, err

@@ -1,4 +1,4 @@
-package clubhouse
+package shortcut
 
 import (
 	"encoding/json"
@@ -23,7 +23,7 @@ type Milestone struct {
 	UpdatedAt           time.Time  `json:"updated_at"`
 }
 
-func (ch *Clubhouse) ListMilestones() ([]Milestone, error) {
+func (ch *Shortcut) ListMilestones() ([]Milestone, error) {
 	body, err := ch.listResources("milestones")
 	if err != nil {
 		return []Milestone{}, err

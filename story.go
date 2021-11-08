@@ -1,4 +1,4 @@
-package clubhouse
+package shortcut
 
 import (
 	"encoding/json"
@@ -95,7 +95,7 @@ type SearchStory struct {
 	WorkflowStateTypes []string  `json:"workflow_state_types,omitempty"`
 }
 
-func (ch *Clubhouse) CreateMultipleStories(newStories []CreateStory) ([]Story, error) {
+func (ch *Shortcut) CreateMultipleStories(newStories []CreateStory) ([]Story, error) {
 	jsonStr, _ := json.Marshal(newStories)
 
 	body, err := ch.createObject("stories/bulk", jsonStr)
@@ -107,7 +107,7 @@ func (ch *Clubhouse) CreateMultipleStories(newStories []CreateStory) ([]Story, e
 	return stories, nil
 }
 
-func (ch *Clubhouse) UpdateMultipleStories(updatedStories []UpdateStory) ([]Story, error) {
+func (ch *Shortcut) UpdateMultipleStories(updatedStories []UpdateStory) ([]Story, error) {
 	jsonStr, _ := json.Marshal(updatedStories)
 
 	body, err := ch.updateResource("stories/bulk", jsonStr)
@@ -119,7 +119,7 @@ func (ch *Clubhouse) UpdateMultipleStories(updatedStories []UpdateStory) ([]Stor
 	return stories, nil
 }
 
-func (ch *Clubhouse) CreateStory(newStory CreateStory) (Story, error) {
+func (ch *Shortcut) CreateStory(newStory CreateStory) (Story, error) {
 	jsonStr, _ := json.Marshal(newStory)
 
 	body, err := ch.createObject("stories", jsonStr)
@@ -131,7 +131,7 @@ func (ch *Clubhouse) CreateStory(newStory CreateStory) (Story, error) {
 	return story, nil
 }
 
-func (ch *Clubhouse) GetStory(storyID int64) (Story, error) {
+func (ch *Shortcut) GetStory(storyID int64) (Story, error) {
 	body, err := ch.getResource(fmt.Sprintf("%s/%d", "stories", storyID))
 	if err != nil {
 		return Story{}, err
@@ -141,7 +141,7 @@ func (ch *Clubhouse) GetStory(storyID int64) (Story, error) {
 	return story, nil
 }
 
-func (ch *Clubhouse) UpdateStory(updatedStory UpdateStory, storyID int64) (Story, error) {
+func (ch *Shortcut) UpdateStory(updatedStory UpdateStory, storyID int64) (Story, error) {
 	jsonStr, _ := json.Marshal(updatedStory)
 	body, err := ch.updateResource(fmt.Sprintf("%s/%d", "stories", storyID), jsonStr)
 	if err != nil {
@@ -152,6 +152,6 @@ func (ch *Clubhouse) UpdateStory(updatedStory UpdateStory, storyID int64) (Story
 	return story, nil
 }
 
-func (ch *Clubhouse) DeleteStory(storyID int64) error {
+func (ch *Shortcut) DeleteStory(storyID int64) error {
 	return ch.deleteResource(fmt.Sprintf("%s/%d", "stories", storyID))
 }

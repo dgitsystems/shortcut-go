@@ -1,4 +1,4 @@
-package clubhouse
+package shortcut
 
 import (
 	"encoding/json"
@@ -47,7 +47,7 @@ type UpdateLabel struct {
 	Name string `json:"name"`
 }
 
-func (ch *Clubhouse) ListLabels() ([]LabelWithCounts, error) {
+func (ch *Shortcut) ListLabels() ([]LabelWithCounts, error) {
 	body, err := ch.listResources("labels")
 	if err != nil {
 		return []LabelWithCounts{}, err
@@ -57,7 +57,7 @@ func (ch *Clubhouse) ListLabels() ([]LabelWithCounts, error) {
 	return labels, nil
 }
 
-func (ch *Clubhouse) CreateLabel(newLabel CreateLabel) (LabelWithCounts, error) {
+func (ch *Shortcut) CreateLabel(newLabel CreateLabel) (LabelWithCounts, error) {
 	jsonStr, _ := json.Marshal(newLabel)
 
 	body, err := ch.createObject("labels", jsonStr)
@@ -69,7 +69,7 @@ func (ch *Clubhouse) CreateLabel(newLabel CreateLabel) (LabelWithCounts, error) 
 	return label, nil
 }
 
-func (ch *Clubhouse) UpdateLabel(updatedLabel UpdateLabel, labelID int64) (LabelWithCounts, error) {
+func (ch *Shortcut) UpdateLabel(updatedLabel UpdateLabel, labelID int64) (LabelWithCounts, error) {
 	jsonStr, _ := json.Marshal(updatedLabel)
 	body, err := ch.updateResource(fmt.Sprintf("%s/%d", "labels", labelID), jsonStr)
 	if err != nil {
@@ -80,6 +80,6 @@ func (ch *Clubhouse) UpdateLabel(updatedLabel UpdateLabel, labelID int64) (Label
 	return label, nil
 }
 
-func (ch *Clubhouse) DeleteLabel(labelID int64) error {
+func (ch *Shortcut) DeleteLabel(labelID int64) error {
 	return ch.deleteResource(fmt.Sprintf("%s/%d", "labels", labelID))
 }

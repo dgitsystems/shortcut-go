@@ -1,4 +1,4 @@
-package clubhouse
+package shortcut
 
 import (
 	"encoding/json"
@@ -17,7 +17,7 @@ type Category struct {
 	UpdatedAt  time.Time `json:"updated_at"`
 }
 
-func (ch *Clubhouse) ListCategories() ([]Category, error) {
+func (ch *Shortcut) ListCategories() ([]Category, error) {
 	body, err := ch.listResources("categories")
 	if err != nil {
 		return []Category{}, err

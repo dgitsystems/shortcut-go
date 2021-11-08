@@ -1,4 +1,4 @@
-package clubhouse
+package shortcut
 
 import (
 	"encoding/json"
@@ -44,7 +44,7 @@ type UpdateLinkedFile struct {
 	URL          string `json:"url"`
 }
 
-func (ch *Clubhouse) GetLinkedFile(fileID int64) (LinkedFile, error) {
+func (ch *Shortcut) GetLinkedFile(fileID int64) (LinkedFile, error) {
 	body, err := ch.getResource(fmt.Sprintf("%s/%d", "linked-files", fileID))
 	if err != nil {
 		return LinkedFile{}, err
@@ -54,7 +54,7 @@ func (ch *Clubhouse) GetLinkedFile(fileID int64) (LinkedFile, error) {
 	return file, nil
 }
 
-func (ch *Clubhouse) UpdateLinkedFile(updatedFile UpdateLinkedFile, fileID int64) (LinkedFile, error) {
+func (ch *Shortcut) UpdateLinkedFile(updatedFile UpdateLinkedFile, fileID int64) (LinkedFile, error) {
 	jsonStr, _ := json.Marshal(updatedFile)
 	body, err := ch.updateResource(fmt.Sprintf("%s/%d", "linked-files", fileID), jsonStr)
 	if err != nil {
@@ -65,11 +65,11 @@ func (ch *Clubhouse) UpdateLinkedFile(updatedFile UpdateLinkedFile, fileID int64
 	return file, nil
 }
 
-func (ch *Clubhouse) DeleteLinkedFile(fileID int64) error {
+func (ch *Shortcut) DeleteLinkedFile(fileID int64) error {
 	return ch.deleteResource(fmt.Sprintf("%s/%d", "linked-files", fileID))
 }
 
-func (ch *Clubhouse) ListLinkedFiles() ([]LinkedFile, error) {
+func (ch *Shortcut) ListLinkedFiles() ([]LinkedFile, error) {
 	body, err := ch.listResources("linked-files")
 	if err != nil {
 		return []LinkedFile{}, err
@@ -79,7 +79,7 @@ func (ch *Clubhouse) ListLinkedFiles() ([]LinkedFile, error) {
 	return files, nil
 }
 
-func (ch *Clubhouse) CreateLinkedFiles(newLinkedFile CreateLinkedFile) (LinkedFile, error) {
+func (ch *Shortcut) CreateLinkedFiles(newLinkedFile CreateLinkedFile) (LinkedFile, error) {
 	jsonStr, _ := json.Marshal(newLinkedFile)
 	body, err := ch.createObject("linked-files", jsonStr)
 	if err != nil {

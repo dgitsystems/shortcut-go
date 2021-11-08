@@ -1,4 +1,4 @@
-package clubhouse
+package shortcut
 
 import (
 	"encoding/json"
@@ -20,7 +20,7 @@ type StoryLink struct {
 	Verb      string    `json:"verb"`
 }
 
-func (ch *Clubhouse) CreateStoryLink(newCreateStoryLink CreateStoryLink) (StoryLink, error) {
+func (ch *Shortcut) CreateStoryLink(newCreateStoryLink CreateStoryLink) (StoryLink, error) {
 	jsonStr, _ := json.Marshal(newCreateStoryLink)
 
 	body, err := ch.createObject("story-links", jsonStr)
@@ -32,7 +32,7 @@ func (ch *Clubhouse) CreateStoryLink(newCreateStoryLink CreateStoryLink) (StoryL
 	return storyLink, nil
 }
 
-func (ch *Clubhouse) GetStoryLink(storyLinkID int64) (StoryLink, error) {
+func (ch *Shortcut) GetStoryLink(storyLinkID int64) (StoryLink, error) {
 	body, err := ch.getResource(fmt.Sprintf("%s/%d", "story-links", storyLinkID))
 	if err != nil {
 		return StoryLink{}, err
@@ -42,6 +42,6 @@ func (ch *Clubhouse) GetStoryLink(storyLinkID int64) (StoryLink, error) {
 	return storyLink, nil
 }
 
-func (ch *Clubhouse) DeleteStoryLink(storyLinkID int64) error {
+func (ch *Shortcut) DeleteStoryLink(storyLinkID int64) error {
 	return ch.deleteResource(fmt.Sprintf("%s/%d", "story-links", storyLinkID))
 }

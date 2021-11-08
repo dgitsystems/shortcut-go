@@ -1,4 +1,4 @@
-package clubhouse_test
+package shortcut_test
 
 import (
 	"io/ioutil"
@@ -8,15 +8,15 @@ import (
 	"testing"
 
 	// Frameworks
-	ch "github.com/dgitsystems/clubhouse-go/v2"
+	sh "github.com/dgitsystems/shortcut-go/v3"
 )
 
 // In order to run tests, you will need to put your
-// API token in a file called .clubhouse in your
+// API token in a file called .shortcut in your
 // home directory
 
 func Test_000(t *testing.T) {
-	if client := ch.New(""); client == nil {
+	if client := sh.New(""); client == nil {
 		t.Error("Invalid client == nil")
 	} else {
 		t.Log(client)
@@ -26,7 +26,7 @@ func Test_000(t *testing.T) {
 func Test_001(t *testing.T) {
 	if token, err := getToken(); err != nil {
 		t.Error(err)
-	} else if client := ch.New(token).SetDebug(true); client == nil {
+	} else if client := sh.New(token).SetDebug(true); client == nil {
 		t.Error("Invalid client == nil")
 	} else if teams, err := client.ListTeams(); err != nil {
 		t.Error(err)
@@ -40,7 +40,7 @@ func Test_001(t *testing.T) {
 func getToken() (string, error) {
 	if user, err := user.Current(); err != nil {
 		return "", err
-	} else if bytes, err := ioutil.ReadFile(filepath.Join(user.HomeDir, ".clubhouse")); err != nil {
+	} else if bytes, err := ioutil.ReadFile(filepath.Join(user.HomeDir, ".shortcut")); err != nil {
 		return "", err
 	} else {
 		return strings.TrimSpace(string(bytes)), nil

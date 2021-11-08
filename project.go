@@ -1,4 +1,4 @@
-package clubhouse
+package shortcut
 
 import (
 	"encoding/json"
@@ -41,7 +41,7 @@ type UpdateProject struct {
 	Name         string   `json:"name"`
 }
 
-func (ch *Clubhouse) ListProjects() ([]Project, error) {
+func (ch *Shortcut) ListProjects() ([]Project, error) {
 	body, err := ch.listResources("projects")
 	if err != nil {
 		return []Project{}, err
@@ -51,7 +51,7 @@ func (ch *Clubhouse) ListProjects() ([]Project, error) {
 	return projects, nil
 }
 
-func (ch *Clubhouse) CreateProject(newProject CreateProject) (Project, error) {
+func (ch *Shortcut) CreateProject(newProject CreateProject) (Project, error) {
 	jsonStr, _ := json.Marshal(newProject)
 
 	body, err := ch.createObject("projects", jsonStr)
@@ -63,7 +63,7 @@ func (ch *Clubhouse) CreateProject(newProject CreateProject) (Project, error) {
 	return project, nil
 }
 
-func (ch *Clubhouse) ListStories(projectID int64) ([]Story, error) {
+func (ch *Shortcut) ListStories(projectID int64) ([]Story, error) {
 	body, err := ch.listResources(fmt.Sprintf("%s/%d/%s", "projects", projectID, "stories"))
 	if err != nil {
 		return []Story{}, err
@@ -73,7 +73,7 @@ func (ch *Clubhouse) ListStories(projectID int64) ([]Story, error) {
 	return stories, nil
 }
 
-func (ch *Clubhouse) GetProject(projectID int64) (Project, error) {
+func (ch *Shortcut) GetProject(projectID int64) (Project, error) {
 	body, err := ch.getResource(fmt.Sprintf("%s/%d", "projects", projectID))
 	if err != nil {
 		return Project{}, err
@@ -83,7 +83,7 @@ func (ch *Clubhouse) GetProject(projectID int64) (Project, error) {
 	return project, nil
 }
 
-func (ch *Clubhouse) UpdateProject(updatedProject UpdateProject, projectID int64) (Project, error) {
+func (ch *Shortcut) UpdateProject(updatedProject UpdateProject, projectID int64) (Project, error) {
 	jsonStr, _ := json.Marshal(updatedProject)
 	body, err := ch.updateResource(fmt.Sprintf("%s/%d", "projects", projectID), jsonStr)
 	if err != nil {
@@ -94,6 +94,6 @@ func (ch *Clubhouse) UpdateProject(updatedProject UpdateProject, projectID int64
 	return project, nil
 }
 
-func (ch *Clubhouse) DeleteProject(projectID int64) error {
+func (ch *Shortcut) DeleteProject(projectID int64) error {
 	return ch.deleteResource(fmt.Sprintf("%s/%d", "projects", projectID))
 }
