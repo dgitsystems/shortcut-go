@@ -7,50 +7,50 @@ import (
 )
 
 type CreateGroup struct {
-	Color         string      `json:"color"`
-	ColorKey      string      `json:"color_key"`
-	Description   string      `json:"description"`
-	DisplayIconID string      `json:"display_icon_id"`
-	MemberIds     []string    `json:"member_ids"`
-	MentionName   interface{} `json:"mention_name"`
-	Name          interface{} `json:"name"`
-	WorkflowIds   []int       `json:"workflow_ids"`
+	Color         string      `json:"color,omitempty"`
+	ColorKey      string      `json:"color_key,omitempty"`
+	Description   string      `json:"description,omitempty"`
+	DisplayIconID string      `json:"display_icon_id,omitempty"`
+	MemberIds     []string    `json:"member_ids,omitempty"`
+	MentionName   interface{} `json:"mention_name,omitempty"`
+	Name          interface{} `json:"name,omitempty"`
+	WorkflowIds   []int       `json:"workflow_ids,omitempty"`
 }
 
 type UpdateGroup struct {
-	Archived      bool        `json:"archived"`
-	Color         string      `json:"color"`
-	ColorKey      string      `json:"color_key"`
-	Description   string      `json:"description"`
-	DisplayIconID string      `json:"display_icon_id"`
-	MemberIds     []string    `json:"member_ids"`
-	MentionName   interface{} `json:"mention_name"`
-	Name          interface{} `json:"name"`
-	WorkflowIds   []int       `json:"workflow_ids"`
+	Archived      bool        `json:"archived,omitempty"`
+	Color         string      `json:"color,omitempty"`
+	ColorKey      string      `json:"color_key,omitempty"`
+	Description   string      `json:"description,omitempty"`
+	DisplayIconID string      `json:"display_icon_id,omitempty"`
+	MemberIds     []string    `json:"member_ids,omitempty"`
+	MentionName   interface{} `json:"mention_name,omitempty"`
+	Name          interface{} `json:"name,omitempty"`
+	WorkflowIds   []int       `json:"workflow_ids,omitempty"`
 }
 
 type Group struct {
-	AppURL      string `json:"app_url,omitempty"`
-	Archived    bool   `json:"archived,omitempty"`
-	Color       string `json:"color,omitempty"`
-	ColorKey    string `json:"color_key,omitempty"`
-	Description string `json:"description,omitempty"`
+	AppURL      string `json:"app_url,omitempty,omitempty"`
+	Archived    bool   `json:"archived,omitempty,omitempty"`
+	Color       string `json:"color,omitempty,omitempty"`
+	ColorKey    string `json:"color_key,omitempty,omitempty"`
+	Description string `json:"description,omitempty,omitempty"`
 	DisplayIcon struct {
-		CreatedAt  time.Time `json:"created_at,omitempty"`
-		EntityType string    `json:"entity_type,omitempty"`
-		ID         string    `json:"id,omitempty"`
-		UpdatedAt  time.Time `json:"updated_at,omitempty"`
-		URL        string    `json:"url,omitempty"`
-	} `json:"display_icon,omitempty"`
-	EntityType        string   `json:"entity_type,omitempty"`
-	ID                string   `json:"id,omitempty"`
-	MemberIds         []string `json:"member_ids,omitempty"`
-	MentionName       string   `json:"mention_name,omitempty"`
-	Name              string   `json:"name,omitempty"`
-	NumEpicsStarted   int      `json:"num_epics_started,omitempty"`
-	NumStories        int      `json:"num_stories,omitempty"`
-	NumStoriesStarted int      `json:"num_stories_started,omitempty"`
-	WorkflowIds       []int    `json:"workflow_ids,omitempty"`
+		CreatedAt  time.Time `json:"created_at,omitempty,omitempty"`
+		EntityType string    `json:"entity_type,omitempty,omitempty"`
+		ID         string    `json:"id,omitempty,omitempty"`
+		UpdatedAt  time.Time `json:"updated_at,omitempty,omitempty"`
+		URL        string    `json:"url,omitempty,omitempty"`
+	} `json:"display_icon,omitempty,omitempty"`
+	EntityType        string   `json:"entity_type,omitempty,omitempty"`
+	ID                string   `json:"id,omitempty,omitempty"`
+	MemberIds         []string `json:"member_ids,omitempty,omitempty"`
+	MentionName       string   `json:"mention_name,omitempty,omitempty"`
+	Name              string   `json:"name,omitempty,omitempty"`
+	NumEpicsStarted   int      `json:"num_epics_started,omitempty,omitempty"`
+	NumStories        int      `json:"num_stories,omitempty,omitempty"`
+	NumStoriesStarted int      `json:"num_stories_started,omitempty,omitempty"`
+	WorkflowIds       []int    `json:"workflow_ids,omitempty,omitempty"`
 }
 
 func (ch *Shortcut) ListGroups() ([]Group, error) {
