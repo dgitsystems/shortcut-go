@@ -16,6 +16,7 @@ type CreateStory struct {
 	ExternalID      string            `json:"external_id"`
 	FileIds         []int64           `json:"file_ids"`
 	FollowerIds     []string          `json:"follower_ids"`
+	GroupID         string            `json:"group_id"`
 	Labels          []CreateLabel     `json:"labels"`
 	LinkedFileIds   []int64           `json:"linked_file_ids"`
 	Name            string            `json:"name"`
@@ -37,6 +38,7 @@ type Story struct {
 	Description     string      `json:"description"`
 	EpicID          int64       `json:"epic_id"`
 	Estimate        int64       `json:"estimate"`
+	ExternalID      string      `json:"external_id"`
 	FileIds         []int64     `json:"file_ids"`
 	FollowerIds     []string    `json:"follower_ids"`
 	ID              int64       `json:"id"`
@@ -55,23 +57,23 @@ type Story struct {
 }
 
 type UpdateStory struct {
-	AfterID         int64         `json:"after_id"`
-	Archived        bool          `json:"archived"`
-	BeforeID        int64         `json:"before_id"`
-	Deadline        string        `json:"deadline"`
-	Description     string        `json:"description"`
-	EpicID          int64         `json:"epic_id"`
-	Estimate        int64         `json:"estimate"`
-	FileIds         []int64       `json:"file_ids"`
-	FollowerIds     []string      `json:"follower_ids"`
-	Labels          []CreateLabel `json:"labels"`
-	LinkedFileIds   []int64       `json:"linked_file_ids"`
-	Name            string        `json:"name"`
-	OwnerIds        []string      `json:"owner_ids"`
-	ProjectID       int64         `json:"project_id"`
-	RequestedByID   string        `json:"requested_by_id"`
-	StoryType       string        `json:"story_type"`
-	WorkflowStateID int64         `json:"workflow_state_id"`
+	AfterID         int64         `json:"after_id,omitempty"`
+	Archived        bool          `json:"archived,omitempty"`
+	BeforeID        int64         `json:"before_id,omitempty"`
+	Deadline        string        `json:"deadline,omitempty"`
+	Description     string        `json:"description,omitempty"`
+	EpicID          int64         `json:"epic_id,omitempty"`
+	Estimate        int64         `json:"estimate,omitempty"`
+	FileIds         []int64       `json:"file_ids,omitempty"`
+	FollowerIds     []string      `json:"follower_ids,omitempty"`
+	Labels          []CreateLabel `json:"labels,omitempty"`
+	LinkedFileIds   []int64       `json:"linked_file_ids,omitempty"`
+	Name            string        `json:"name,omitempty"`
+	OwnerIds        []string      `json:"owner_ids,omitempty"`
+	ProjectID       int64         `json:"project_id,omitempty"`
+	RequestedByID   string        `json:"requested_by_id,omitempty"`
+	StoryType       string        `json:"story_type,omitempty"`
+	WorkflowStateID int64         `json:"workflow_state_id,omitempty"`
 }
 
 type SearchStory struct {
